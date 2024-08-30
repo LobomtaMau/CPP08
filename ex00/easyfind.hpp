@@ -8,12 +8,18 @@
 class NotFoundException : public std::exception {
     public:
         const char *what() const throw() {
-            return "Element not Found";
+            return "... not Found";
         }
 };
 
 template <typename Template>
-typename 
+typename Template::iterator easyfind(Template &container, int value)
+{
+    typename Template::iterator idx = std::find(container.begin(), container.end(), value);
+    if (idx == container.end())
+        throw NotFoundException();
+    return idx;
+};
 
 
 #endif
