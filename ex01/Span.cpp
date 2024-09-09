@@ -22,13 +22,6 @@ void Span::addNumber(int nr) {
     _nr.push_back(nr);
 }
 
-template<typename Itt>
-void Span::addNumbersRange(Itt begin, Itt end) {
-    if(std::distance(begin, end) + _nr.size() > _maxSize) {
-        throw FullOrNoSpanExeption();
-    }
-    _nr.insert(_nr.end(), begin, end);
-}
 
 int Span::shortestSpan() const {
     if(_nr.size() < 2) {
@@ -60,4 +53,16 @@ const char *Span::FullOrNoSpanExeption::what() const throw() {
     return "Span Full or not enough numbers.\n";
 }
 
+void Span::addNumbersRange(std::vector<int>::iterator begin, std::vector<int>::iterator end) {
+    if (std::distance(begin, end) + _nr.size() > _maxSize) {
+        throw std::out_of_range("Adding these numbers would exceed the max size of the Span");
+    }
+    _nr.insert(_nr.end(), begin, end);
+}
 
+void Span::printNumbers() const {
+    for (std::vector<int>::const_iterator it = _nr.begin(); it != _nr.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}

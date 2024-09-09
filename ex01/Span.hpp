@@ -19,11 +19,12 @@ class Span {
         ~Span();
 
         void addNumber(int nr);
-
-        template<typename Itt>
-        void addNumbersRange(Itt begin, Itt end);
         int shortestSpan() const;
         int longestSpan() const;
+
+        void addNumbersRange(std::vector<int>::iterator begin, std::vector<int>::iterator end);
+        
+        void printNumbers() const;
 
         class FullOrNoSpanExeption : public std::exception {
             public:
